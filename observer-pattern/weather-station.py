@@ -11,10 +11,12 @@ class WeatherStation:
     self._observers.remove(observer)
 
   def notify_observers(self):
+    """Notify all observers about the temperature change"""
     for obs in self._observers:
       obs.update(self._temperature)
 
   def set_temperature(self, temp):
+    """Set the temperature and notify observers"""
     print(f'Setting temperature to {temp} degrees')
     self._temperature = temp
     self.notify_observers()
@@ -23,12 +25,15 @@ class WeatherStation:
 # Observer (interface)
 class Observer:
   def update(self, temp):
+    """React to temperature updates"""
     raise NotImplementedError
 
 # Concrete observer: Say a display device
 class DisplayDevice(Observer):
   def update(self, temperature):
     print(f'Display device (observer): Temperature updated to {temperature} degrees')
+    # We can trigger some code here to update the display value according to the value of temperature received.
+    # print('Display pixels updated')
 
 
 # Dry run
