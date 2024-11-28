@@ -1,13 +1,30 @@
+from abc import ABC, abstractmethod
+
+# Observer (interface)
+class Observer(ABC):
+  @abstractmethod
+  def update(self, temp: int):
+    """React to temperature updates"""
+    raise NotImplementedError
+
+# Concrete observer: Say a display device
+class DisplayDevice(Observer):
+  def update(self, temperature: int):
+    print(f'Display device (observer): Temperature updated to {temperature} degrees')
+    # We can trigger some code here to update the display value according to the value of temperature received.
+    # print('Display pixels updated')
+
+
 # Subject
 class WeatherStation:
   def __init__(self):
     self._observers = []
     self._temperature = 0
 
-  def add_observer(self, observer):
+  def add_observer(self, observer: Observer):
     self._observers.append(observer)
 
-  def remove_observer(self, observer):
+  def remove_observer(self, observer: Observer):
     self._observers.remove(observer)
 
   def notify_observers(self):
@@ -15,25 +32,12 @@ class WeatherStation:
     for obs in self._observers:
       obs.update(self._temperature)
 
-  def set_temperature(self, temp):
+  def set_temperature(self, temp: int):
     """Set the temperature and notify observers"""
     print(f'Setting temperature to {temp} degrees')
     self._temperature = temp
     self.notify_observers()
 
-
-# Observer (interface)
-class Observer:
-  def update(self, temp):
-    """React to temperature updates"""
-    raise NotImplementedError
-
-# Concrete observer: Say a display device
-class DisplayDevice(Observer):
-  def update(self, temperature):
-    print(f'Display device (observer): Temperature updated to {temperature} degrees')
-    # We can trigger some code here to update the display value according to the value of temperature received.
-    # print('Display pixels updated')
 
 
 # Dry run
