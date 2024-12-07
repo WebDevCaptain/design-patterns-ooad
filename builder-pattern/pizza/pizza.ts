@@ -9,11 +9,12 @@ class Pizza {
     this.toppings = toppings;
   }
 
-  print(): string {
+  toString(): string {
     return `Pizza(size=${this.size}, crust=${this.crust}, toppings=${this.toppings})`;
   }
 }
 
+// Builder allows us to construct the Pizza (object) incrementally with diff configurations
 class PizzaBuilder {
   private size = "Medium";
   private crust = "Thin";
@@ -48,4 +49,4 @@ const pizza = new PizzaBuilder()
   .addTopping("Caps")
   .build();
 
-console.log("\n", pizza.print(), "\n");
+console.log("\n", pizza.toString(), "\n");
