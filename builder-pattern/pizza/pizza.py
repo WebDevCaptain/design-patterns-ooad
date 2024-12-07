@@ -1,5 +1,8 @@
+from typing import List
+
+
 class Pizza:
-    def __init__(self, size, crust, toppings):
+    def __init__(self, size: str, crust: str, toppings: List[str]):
         self.size = size
         self.crust = crust
         self.toppings = toppings
@@ -14,19 +17,19 @@ class PizzaBuilder:
         self.crust = "Thin"
         self.toppings = []
 
-    def set_size(self, size):
+    def set_size(self, size: str) -> "PizzaBuilder":
         self.size = size
         return self
 
-    def set_crust(self, crust):
+    def set_crust(self, crust: str) -> "PizzaBuilder":
         self.crust = crust
         return self
 
-    def add_topping(self, topping):
+    def add_topping(self, topping: str) -> "PizzaBuilder":
         self.toppings.append(topping)
         return self
 
-    def build(self):
+    def build(self) -> Pizza:
         return Pizza(self.size, self.crust, self.toppings)
 
 
