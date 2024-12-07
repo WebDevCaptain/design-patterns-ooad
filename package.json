@@ -1,0 +1,18 @@
+{
+  "name": "design-patterns",
+  "version": "0.1.0",
+  "description": "Revisiting all the major design patterns.",
+  "main": "index.js",
+  "scripts": {
+    "watch": "tsc -w"
+  },
+  "keywords": [
+    "design-patterns",
+    "object-oriented-programming"
+  ],
+  "author": "Shreyash",
+  "license": "GPL-3.0-only",
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

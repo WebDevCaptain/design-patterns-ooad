@@ -1,39 +1,44 @@
-class Logger:
+from typing import Optional
+from abc import ABC, abstractmethod
+
+
+class Logger(ABC):
     """Base handler in the chain."""
 
     def __init__(self, log_level: str):
         self.log_level = log_level
-        self.next_handler = None
+        self.next_handler: Optional[Logger] = None
 
-    def set_next(self, handler):
+    def set_next(self, handler: "Logger") -> "Logger":
         """Sets the next handler in the chain."""
         self.next_handler = handler
         return handler  # For chaining calls (when we link the handlers together, we can do a.set_next(b).set_next(c) and so on..)
 
-    def handle(self, level, message):
+    def handle(self, level: str, message: str) -> None:
         """Handles the request if the level matches; otherwise passes it along."""
         if self.log_level == level:
             self._log_message(message)
         elif self.next_handler:
             self.next_handler.handle(level, message)
 
-    def _log_message(self, message):
+    @abstractmethod
+    def _log_message(self, message: str) -> None:
         """Actual logging logic to be implemented by subclasses."""
         raise NotImplementedError("Subclasses must implement this method")
 
 
 class InfoLogger(Logger):
-    def _log_message(self, message):
+    def _log_message(self, message: str):
         print(f"INFO: {message}")
 
 
 class DebugLogger(Logger):
-    def _log_message(self, message):
+    def _log_message(self, message: str):
         print(f"DEBUG: {message}")
 
 
 class ErrorLogger(Logger):
-    def _log_message(self, message):
+    def _log_message(self, message: str):
         print(f"ERROR: {message}")
 
 
