@@ -2,6 +2,7 @@ interface Command {
   execute(): void;
 }
 
+// Receiver class
 class Light {
   on() {
     console.log("Light turned ON.");
@@ -12,6 +13,7 @@ class Light {
   }
 }
 
+// -------  Concrete commands (Light ON and OFF)  ------
 class LightOnCommand implements Command {
   private light: Light;
 
@@ -36,6 +38,7 @@ class LightOffCommand implements Command {
   }
 }
 
+// --- Invoker ---
 class RemoteControl {
   private command: Command | null;
 
@@ -54,7 +57,7 @@ class RemoteControl {
   }
 }
 
-// Usage
+// __________ Usage ___________
 const light = new Light();
 
 const lightOnCommand = new LightOnCommand(light);
