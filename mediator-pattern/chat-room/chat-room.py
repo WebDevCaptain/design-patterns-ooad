@@ -1,17 +1,17 @@
 # Mediator
 class ChatRoom:
-    def show_message(self, user, msg):
+    def show_message(self, user: str, msg: str):
         # Mediator handles displaying of messages
         print(f"[{user}]: {msg}")
 
 
 # Colleague
 class User:
-    def __init__(self, name, chatroom):
+    def __init__(self, name: str, chatroom: ChatRoom):
         self.name = name
         self.chatroom = chatroom  # User is associated with a chatroom mediator
 
-    def send_message(self, message):
+    def send_message(self, message: str):
         # User sends message via chatroom mediator
         self.chatroom.show_message(self.name, message)
 
